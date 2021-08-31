@@ -26,6 +26,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @RestController
 public class GenericFileProcessorController {
 	
+		@Autowired
+		private GcpManhattanPublisher gcpManhattanPublisher;
+	
 	
 	  @RequestMapping(method = RequestMethod.GET, path = "/process/{fileName}")
 	  public String processTransaction (@PathVariable String fileName) throws Exception{	 	 
@@ -65,7 +68,7 @@ public class GenericFileProcessorController {
 						System.out.println(" Sent data to PO Message Queue");
 						
 						//Send Data to PubSub
-					//	gcpManhattanPublisher.publish(convertedData);
+						gcpManhattanPublisher.publish(convertedData);
 						
 						System.out.println("Sent Data to Google Pub Sub");
 						
