@@ -1,5 +1,6 @@
 package com.ais.servicebus;
 
+import com.ais.constants.AisConstants;
 import com.azure.messaging.servicebus.*;
 
 import java.util.concurrent.CountDownLatch;
@@ -8,12 +9,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ServiceBusMessageSender {
-	
-	static String connectionStringPO = "Endpoint=sb://aisservicebusasda.servicebus.windows.net/;SharedAccessKeyName=asdaPoQueueAccessPolicy;SharedAccessKey=FgkMFGaNW++lue7hrvW+xQiW0UPXBxdj28GQLP4BEuE=;EntityPath=aispoqueue";
-	static String queueNamePO = "aispoqueue";  
-	
-	static String connectionStringSO = "Endpoint=sb://aisservicebusasda.servicebus.windows.net/;SharedAccessKeyName=asdaSoQueueAccessPolicy;SharedAccessKey=RO/NYWo+Su8JM6tnypQ00jHMjMlM7zmQzsv5SBZCn/Q=;EntityPath=aissoqueue";
-	static String queueNameSO = "aissoqueue"; 
 	
 	public static void main(String[] args) {
 		
@@ -24,14 +19,14 @@ public class ServiceBusMessageSender {
 	{
 	    // create a Service Bus Sender client for the queue 
 	    ServiceBusSenderClient senderClient = new ServiceBusClientBuilder()
-	            .connectionString(connectionStringPO)
+	            .connectionString(AisConstants.connectionStringPO)
 	            .sender()
-	            .queueName(queueNamePO)
+	            .queueName(AisConstants.queueNamePO)
 	            .buildClient();
 
 	    // send one message to the queue
 	    senderClient.sendMessage(new ServiceBusMessage(message));
-	    System.out.println("Sent messages to the queue: " + queueNamePO);        
+	    System.out.println("Sent messages to the queue: " + AisConstants.queueNamePO);        
 	}
 	
 	
@@ -39,14 +34,14 @@ public class ServiceBusMessageSender {
 	{
 	    // create a Service Bus Sender client for the queue 
 	    ServiceBusSenderClient senderClient = new ServiceBusClientBuilder()
-	            .connectionString(connectionStringSO)
+	            .connectionString(AisConstants.connectionStringSO)
 	            .sender()
-	            .queueName(queueNameSO)
+	            .queueName(AisConstants.queueNameSO)
 	            .buildClient();
 
 	    // send one message to the queue
 	    senderClient.sendMessage(new ServiceBusMessage(message));
-	    System.out.println("Sent messages to the queue: " + queueNameSO);        
+	    System.out.println("Sent messages to the queue: " + AisConstants.queueNameSO);        
 	}
 		
 }

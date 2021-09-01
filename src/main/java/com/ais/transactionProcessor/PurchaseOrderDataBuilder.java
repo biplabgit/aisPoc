@@ -15,13 +15,11 @@ public class PurchaseOrderDataBuilder {
 		
 		PurchaseOrderMA poMA = new PurchaseOrderMA();
 		List<PurchaseOrderLine> purchaseOrderLines = new ArrayList<PurchaseOrderLine>();
-
 		String purchaseOrderId = "";
 		
 		for(String linedetail : list) {
 			
-			String subTransactionType = linedetail.split("\\|")[8];
-			
+			String subTransactionType = linedetail.split("\\|")[8];			
 			if(subTransactionType.equalsIgnoreCase("02000")) {
 				
 				poMA.setFacilityId(linedetail.split("\\|")[2]);
@@ -42,12 +40,10 @@ public class PurchaseOrderDataBuilder {
 				
 			}else if (subTransactionType.equalsIgnoreCase("02030")) {
 				
-			}else if(subTransactionType.equalsIgnoreCase("04000")){
-				
+			}else if(subTransactionType.equalsIgnoreCase("04000")){				
 			}
 			
-		}
-		
+		}		
 		poMA.setPurchaseOrderLines(purchaseOrderLines);
 		
 		return poMA;
@@ -80,14 +76,11 @@ public class PurchaseOrderDataBuilder {
 				soLine.setItemId(linedetail.split("\\|")[19]);
 				soLine.setOrderedQuantity(linedetail.split("\\|")[21]);
 				
-				storeOrderLines.add(soLine);
-				
-			}
-			
+				storeOrderLines.add(soLine);				
+			}			
 		}
 		
-		soMA.setStoreOrderLines(storeOrderLines);
-		
+		soMA.setStoreOrderLines(storeOrderLines);		
 		return soMA;
 		
 	}

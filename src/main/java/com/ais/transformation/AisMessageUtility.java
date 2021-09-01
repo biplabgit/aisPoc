@@ -3,12 +3,12 @@ package com.ais.transformation;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
 
+import com.ais.constants.AisConstants;
 import com.ais.file.FileProcessor;
 import com.microsoft.azure.storage.CloudStorageAccount;
 import com.microsoft.azure.storage.blob.CloudBlob;
@@ -18,17 +18,12 @@ import com.microsoft.azure.storage.blob.CloudBlobContainer;
 public class AisMessageUtility {
 		
 
-	public static final String storageConnectionString =
-			"DefaultEndpointsProtocol=https;AccountName=asdapocstorage;AccountKey=SKk/zAao7aJ69hk/VOJsAM55SMY8VBT3lOoeiw6wpGVhUyTz8pw9LGdylNPGKlnLGwXYzVw7hYjPkA4bC9toVQ==;EndpointSuffix=core.windows.net;";
-
 	public static void main(String[] args) {
 		//read();
 		//transactionSplitter();
-
 	}
 	
-	static List<String> lines = new ArrayList<String>();
-	
+		
 	/*
 	 * public static void read(){ try { // Retrieve storage account from
 	 * connection-string. CloudStorageAccount storageAccount =
@@ -53,11 +48,12 @@ public class AisMessageUtility {
 	public static Map<String, List<String>> transactionSplitter(String blobReference){
 		
 		Map<String, List<String>> splitterMap = null; 
+		 List<String> lines = new ArrayList<String>();
 		
 		try
 		{
 			// Retrieve storage account from connection-string.
-			CloudStorageAccount storageAccount = CloudStorageAccount.parse(storageConnectionString);
+			CloudStorageAccount storageAccount = CloudStorageAccount.parse(AisConstants.storageConnectionString);
 			System.out.println("connection established");
 			// Create the blob client.
 			CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
@@ -76,9 +72,7 @@ public class AisMessageUtility {
 	            
 	           // Process Lines 
 	            
-	            splitterMap = FileProcessor.groupMessage(lines);
-	            
-	                      
+	            splitterMap = FileProcessor.groupMessage(lines);                                  
 			
 		}
 		catch (Exception e)
